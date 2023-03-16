@@ -1,0 +1,23 @@
+.accounts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+  gap: var(--spacer-large);
+  margin-bottom: var(--spacer-xxlarge);
+}
+
+.account {
+  background: var(--dark);
+  padding: var(--spacer-large);
+  text-align: left;
+  border-radius: 4px;
+}
+
+.total {
+  color: var(--primary-300);
+  margin-bottom: var(--spacer-medium);
+}
+
+.account strong {
+  font-size: var(--font-large);
+  font-weight: 700;
+}

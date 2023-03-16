@@ -1,0 +1,39 @@
+.app__row {
+  padding: 0 0 20px;
+  display: flex;
+  gap: var(--spacer-medium);
+  border-bottom: 1px solid #1e1e27;
+  margin-bottom: var(--spacer-xxlarge);
+  position: relative;
+}
+
+.app__row:after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: -75%;
+  width: 300%;
+  height: 1px;
+  background: #1e1e27;
+}
+
+.logo {
+  will-change: filter;
+  width: 111px;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
