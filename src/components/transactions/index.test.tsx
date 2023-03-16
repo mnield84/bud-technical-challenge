@@ -1,4 +1,11 @@
-import { render, screen, fireEvent, getByText } from "@testing-library/react";
+import {
+  render,
+  screen,
+  fireEvent,
+  getByText,
+  act,
+  waitFor,
+} from "@testing-library/react";
 import { TransactionHistory } from ".";
 
 describe("transaction history", () => {
@@ -22,10 +29,14 @@ describe("transaction history", () => {
   });
 
   test.skip("changing between the expenses and income tabs should show different transactions", async () => {
-    render(<TransactionHistory />);
+    await act(async () => {
+      render(<TransactionHistory />);
+    });
 
-    const expensesTabTrigger = screen.findByRole("tab", { name: "Expenses" });
-    const incomeTabTrigger = await screen.findByRole("tab", { name: "Income" });
+    const expensesTabTrigger = await waitFor(() =>
+      screen.getByText("Expenses")
+    );
+    const incomeTabTrigger = await waitFor(() => screen.getByText("Income"));
 
     const expensesTable = screen.getByRole("table", {
       name: "Expenses",
@@ -33,6 +44,10 @@ describe("transaction history", () => {
     const incomeTable = screen.queryByRole("table", {
       name: "Income",
     });
+
+    // Check that first tab is selected by default
+    expect(expensesTabTrigger).toHaveAttribute("aria-selected", "true");
+    expect(incomeTabTrigger).toHaveAttribute("aria-selected", "false");
 
     expect(expensesTable).toBeInTheDocument();
     expect(incomeTable).not.toBeInTheDocument();
